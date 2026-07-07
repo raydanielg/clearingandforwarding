@@ -162,6 +162,7 @@
     });
     </script>
 
+    @include('partials.demo-notice')
     @stack('scripts')
 </body>
 </html>
