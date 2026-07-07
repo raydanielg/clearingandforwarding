@@ -52,6 +52,16 @@ class DemoUsersSeeder extends Seeder
                 'email' => 'cashier@caf.co.tz',
                 'password' => 'password',
             ],
+            'Insurance Officer' => [
+                'name' => 'Rehema Shilla',
+                'email' => 'insurance@caf.co.tz',
+                'password' => 'password',
+            ],
+            'Branch Manager' => [
+                'name' => 'Frank Mbwana',
+                'email' => 'branch@caf.co.tz',
+                'password' => 'password',
+            ],
         ];
 
         foreach ($roles as $roleName => $info) {

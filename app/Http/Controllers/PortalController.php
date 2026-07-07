@@ -29,15 +29,18 @@ class PortalController extends Controller
 
         $files = ShipmentFile::where('client_id', $client->id)->latest()->limit(5)->get();
         $invoices = Invoice::where('client_id', $client->id)->latest()->limit(5)->get();
+        $policies = InsurancePolicy::where('client_id', $client->id)->latest()->limit(5)->get();
 
         $stats = [
             'active_files'   => ShipmentFile::where('client_id', $client->id)->whereNotIn('status', ['closed', 'cancelled'])->count(),
             'total_files'    => ShipmentFile::where('client_id', $client->id)->count(),
             'unpaid_invoices'=> Invoice::where('client_id', $client->id)->whereIn('status', ['sent', 'partially_paid', 'overdue'])->count(),
             'outstanding'    => Invoice::where('client_id', $client->id)->whereIn('status', ['sent', 'partially_paid', 'overdue'])->selectRaw('SUM(total - amount_paid) as outstanding')->value('outstanding') ?? 0,
+            'active_policies'=> InsurancePolicy::where('client_id', $client->id)->whereIn('status', ['issued', 'active'])->count(),
+            'total_policies' => InsurancePolicy::where('client_id', $client->id)->count(),
         ];
 
-        return view('portal.dashboard', compact('client', 'files', 'invoices', 'stats'));
+        return view('portal.dashboard', compact('client', 'files', 'invoices', 'policies', 'stats'));
     }
 
     public function shipmentsIndex(Request $request)

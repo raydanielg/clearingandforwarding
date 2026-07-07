@@ -21,7 +21,7 @@
 </div>
 @push('scripts')
 <script>
-function voidReceipt(){if(!confirm('Void this receipt? This will reverse the payment.'))return;$.ajax({url:'{{route('admin.receipts.destroy',$receipt)}}',type:'POST',data:{_method:'DELETE',_token:'{{csrf_token()}}'},success:function(r){showToast('success','Voided',r.message);setTimeout(()=>window.location.href='{{route('admin.receipts.index')}}',800);},error:function(){showToast('error','Error','Could not void receipt');}});}
+function voidReceipt(){confirmAction('{{route('admin.receipts.destroy',$receipt)}}',{title:'Void This Receipt?',text:'This will reverse the payment and mark the receipt as void.',successMsg:'Receipt voided successfully!',redirect:'{{route('admin.receipts.index')}}'});}
 </script>
 @endpush
 @endsection

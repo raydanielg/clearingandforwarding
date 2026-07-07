@@ -36,7 +36,7 @@
 <script>
 function openPcModal(){$('#pcModal').removeClass('hidden').addClass('flex');}
 function closePcModal(){$('#pcModal').addClass('hidden').removeClass('flex');}
-function deletePc(id){if(!confirm('Delete this entry?'))return;$.ajax({url:'{{route('admin.petty-cash.destroy','__id__')}}'.replace('__id__',id),type:'POST',data:{_method:'DELETE',_token:'{{csrf_token()}}'},success:function(r){showToast('success','Deleted',r.message);setTimeout(()=>location.reload(),800);},error:function(){showToast('error','Error','Could not delete');}});}
+function deletePc(id){confirmDelete('{{route('admin.petty-cash.destroy','__id__')}}'.replace('__id__',id),{title:'Delete Petty Cash Entry?',text:'This petty cash entry will be permanently removed.'});}
 $('#pcForm').on('submit',function(e){e.preventDefault();$.ajax({url:'{{route('admin.petty-cash.store')}}',type:'POST',data:$(this).serialize(),success:function(r){if(r.success){showToast('success','Success',r.message);closePcModal();setTimeout(()=>location.reload(),800);}},error:function(x){if(x.responseJSON?.errors){Object.values(x.responseJSON.errors).forEach(e=>showToast('error','Validation',e[0]));}}});});
 </script>
 @endpush

@@ -139,6 +139,22 @@
             </div>
             @endcan
 
+            @can('insurance.view')
+            {{-- Insurance (Line 2) --}}
+            <div class="sidebar-group">
+                <button onclick="toggleMenu('menu-insurance')" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-emerald-100 text-sm font-medium {{ request()->routeIs('admin.insurance*') ? 'active' : '' }}">
+                    <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.062-.18-2.087-.514-3.056z"/></svg>
+                    <span>Insurance</span>
+                    <svg class="w-4 h-4 ml-auto transition-transform" id="arrow-insurance" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div id="menu-insurance" class="sidebar-submenu pl-11 space-y-0.5 {{ request()->routeIs('admin.insurance*') ? 'open' : '' }}">
+                    <a href="{{ route('admin.insurance.policies.index') }}" class="block py-1.5 text-xs text-emerald-200/70 hover:text-white transition-colors">Policies</a>
+                    <a href="{{ route('admin.insurance.claims.index') }}" class="block py-1.5 text-xs text-emerald-200/70 hover:text-white transition-colors">Claims</a>
+                    <a href="{{ route('admin.insurance.insurers.index') }}" class="block py-1.5 text-xs text-emerald-200/70 hover:text-white transition-colors">Insurers</a>
+                </div>
+            </div>
+            @endcan
+
             @can('finance.view')
             {{-- Finance --}}
             <div class="sidebar-group">
@@ -220,6 +236,7 @@
                     <a href="{{ route('admin.reports.disbursements') }}" class="block py-1.5 text-xs text-emerald-200/70 hover:text-white transition-colors">Disbursement Report</a>
                     <a href="{{ route('admin.reports.debtors') }}" class="block py-1.5 text-xs text-emerald-200/70 hover:text-white transition-colors">Debtors (Aging)</a>
                     <a href="{{ route('admin.reports.officer-performance') }}" class="block py-1.5 text-xs text-emerald-200/70 hover:text-white transition-colors">Officer Performance</a>
+                    <a href="{{ route('admin.reports.insurance') }}" class="block py-1.5 text-xs text-emerald-200/70 hover:text-white transition-colors">Insurance Report</a>
                 </div>
             </div>
             @endcan

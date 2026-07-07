@@ -84,7 +84,7 @@
 @push('scripts')
 <script>
 $('#paymentForm').on('submit',function(e){e.preventDefault();$.ajax({url:this.action,type:'POST',data:$(this).serialize(),success:function(r){if(r.success){showToast('success','Success',r.message);setTimeout(()=>location.reload(),800);}},error:function(x){if(x.responseJSON?.errors){Object.values(x.responseJSON.errors).forEach(e=>showToast('error','Validation',e[0]));}else{showToast('error','Error','Could not record payment');}}});});
-function convertProforma(){if(!confirm('Convert this proforma to an invoice?'))return;$.ajax({url:'{{route('admin.invoices.convert',$invoice)}}',type:'POST',data:{_token:'{{csrf_token()}}'},success:function(r){if(r.success){showToast('success','Success',r.message);setTimeout(()=>window.location.href=r.redirect,800);}},error:function(){showToast('error','Error','Could not convert');}});}
+function convertProforma(){confirmAction('{{route('admin.invoices.convert',$invoice)}}',{title:'Convert Proforma to Invoice?',text:'This will convert this proforma into a formal invoice.',successMsg:'Proforma converted to invoice!'});}
 </script>
 @endpush
 @endsection

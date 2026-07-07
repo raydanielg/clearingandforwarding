@@ -9,6 +9,8 @@ class PettyCash extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'petty_cash';
+
     protected $fillable = ['date', 'description', 'amount', 'type', 'shipment_file_id', 'recorded_by', 'approved_by'];
 
     protected function casts(): array

@@ -35,9 +35,9 @@
     <div class="bg-gradient-to-br from-sky-500 to-sky-600 rounded-xl border border-sky-400 p-4 text-white relative overflow-hidden hover:shadow-lg transition-shadow">
         <div class="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -mr-8 -mt-8"></div>
         <div class="relative z-10">
-            <span class="text-[10px] font-medium text-sky-100">Unpaid Invoices</span>
-            <p class="text-xl font-bold tracking-tight text-white mt-2">{{ $stats['unpaid_invoices'] }}</p>
-            <p class="text-[10px] text-sky-200 font-medium mt-1">Outstanding</p>
+            <span class="text-[10px] font-medium text-sky-100">Active Policies</span>
+            <p class="text-xl font-bold tracking-tight text-white mt-2">{{ $stats['active_policies'] }}</p>
+            <p class="text-[10px] text-sky-200 font-medium mt-1">{{ $stats['total_policies'] }} total</p>
         </div>
     </div>
     <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-xl border border-red-400 p-4 text-white relative overflow-hidden hover:shadow-lg transition-shadow">
@@ -96,6 +96,31 @@
             </tr>
             @empty
             <tr><td colspan="4" class="px-5 py-12 text-center text-sm text-gray-400">No invoices yet.</td></tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
+{{-- Recent Insurance Policies --}}
+<div class="bg-white rounded-xl border overflow-hidden mb-6">
+    <div class="px-5 py-4 border-b flex items-center justify-between">
+        <h3 class="text-sm font-semibold text-gray-900">Insurance Policies</h3>
+        <a href="{{ route('portal.insurance.index') }}" class="text-xs font-medium text-emerald-600 hover:text-emerald-700">View All →</a>
+    </div>
+    <table class="w-full text-sm">
+        <thead><tr class="text-left text-xs text-gray-500 bg-gray-50/50 border-b">
+            <th class="px-5 py-3 font-medium">Policy No</th><th class="px-5 py-3 font-medium">Type</th><th class="px-5 py-3 font-medium">Cover Period</th><th class="px-5 py-3 font-medium">Status</th>
+        </tr></thead>
+        <tbody>
+            @forelse($policies as $pol)
+            <tr class="border-b border-gray-100 hover:bg-gray-50/50">
+                <td class="px-5 py-3"><a href="{{ route('portal.insurance.show', $pol) }}" class="text-xs font-medium text-emerald-600 hover:underline">{{ $pol->policy_no }}</a></td>
+                <td class="px-5 py-3 text-xs text-gray-700">{{ ucfirst(str_replace('_', ' ', $pol->type)) }}</td>
+                <td class="px-5 py-3 text-xs text-gray-500">{{ $pol->cover_start_date?->format('d M Y') ?? '—' }} → {{ $pol->cover_end_date?->format('d M Y') ?? '—' }}</td>
+                <td class="px-5 py-3"><span class="text-[10px] px-2 py-0.5 rounded-full @if($pol->status === 'active') bg-emerald-50 text-emerald-700 @elseif($pol->status === 'expired') bg-red-50 text-red-700 @else bg-amber-50 text-amber-700 @endif capitalize">{{ $pol->status }}</span></td>
+            </tr>
+            @empty
+            <tr><td colspan="4" class="px-5 py-12 text-center text-sm text-gray-400">No insurance policies yet.</td></tr>
             @endforelse
         </tbody>
     </table>

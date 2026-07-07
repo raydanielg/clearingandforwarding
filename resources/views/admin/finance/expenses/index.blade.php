@@ -36,7 +36,7 @@
 <script>
 function openExpModal(){$('#expModal').removeClass('hidden').addClass('flex');}
 function closeExpModal(){$('#expModal').addClass('hidden').removeClass('flex');}
-function deleteExp(id){if(!confirm('Delete this expense?'))return;$.ajax({url:'{{route('admin.expenses.destroy','__id__')}}'.replace('__id__',id),type:'POST',data:{_method:'DELETE',_token:'{{csrf_token()}}'},success:function(r){showToast('success','Deleted',r.message);setTimeout(()=>location.reload(),800);},error:function(){showToast('error','Error','Could not delete');}});}
+function deleteExp(id){confirmDelete('{{route('admin.expenses.destroy','__id__')}}'.replace('__id__',id),{title:'Delete Expense?',text:'This expense record will be permanently removed.'});}
 $('#expForm').on('submit',function(e){e.preventDefault();$.ajax({url:'{{route('admin.expenses.store')}}',type:'POST',data:$(this).serialize(),success:function(r){if(r.success){showToast('success','Success',r.message);closeExpModal();setTimeout(()=>location.reload(),800);}},error:function(x){if(x.responseJSON?.errors){Object.values(x.responseJSON.errors).forEach(e=>showToast('error','Validation',e[0]));}}});});
 </script>
 @endpush

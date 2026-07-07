@@ -25,6 +25,6 @@
     </div>
 </div>
 @push('scripts')
-<script>function approveDisb(){if(!confirm('Approve this disbursement?'))return;$.ajax({url:'{{route('admin.disbursements.approve',$disbursement)}}',type:'POST',data:{_token:'{{csrf_token()}}'},success:function(r){showToast('success','Approved',r.message);setTimeout(()=>location.reload(),800);},error:function(){showToast('error','Error','Could not approve');}});}</script>
+<script>function approveDisb(){confirmAction('{{route('admin.disbursements.approve',$disbursement)}}',{title:'Approve Disbursement?',text:'This will approve the disbursement for payment.',successMsg:'Disbursement approved successfully!'});}</script>
 @endpush
 @endsection

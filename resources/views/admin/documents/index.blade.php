@@ -16,6 +16,9 @@
 </div>
 <div class="bg-white rounded-xl border overflow-hidden"><div id="docTable">@include('admin.documents.partials.table')</div></div>
 @push('scripts')
-<script>let docT;$('#docSearch').on('input',function(){clearTimeout(docT);docT=setTimeout(function(){const p=new URLSearchParams();if($('#docSearch').val())p.set('search',$('#docSearch').val());$.ajax({url:'{{route('admin.documents.index')}}?'+p.toString(),type:'GET',dataType:'json',success:function(r){$('#docTable').html(r.html);}});},300);});</script>
+<script>let docT;$('#docSearch').on('input',function(){clearTimeout(docT);docT=setTimeout(function(){const p=new URLSearchParams();if($('#docSearch').val())p.set('search',$('#docSearch').val());$.ajax({url:'{{route('admin.documents.index')}}?'+p.toString(),type:'GET',dataType:'json',success:function(r){$('#docTable').html(r.html);}});},300);});
+function verifyDoc(id) { $.ajax({ url: '{{ route('admin.documents.verify', '__id__') }}'.replace('__id__', id), type: 'POST', data: { _token: '{{ csrf_token() }}' }, success: function(r) { showToast('success', 'Verified', r.message); setTimeout(() => location.reload(), 800); }, error: function() { showToast('error', 'Error', 'Could not verify'); } }); }
+function deleteDoc(id) { confirmDelete('{{ route('admin.documents.destroy', '__id__') }}'.replace('__id__', id), { title: 'Delete Document?', text: 'This document file will be permanently removed.' }); }
+</script>
 @endpush
 @endsection

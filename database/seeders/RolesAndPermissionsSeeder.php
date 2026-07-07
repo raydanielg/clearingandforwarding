@@ -47,7 +47,7 @@ class RolesAndPermissionsSeeder extends Seeder
             // Insurance
             'insurance.view', 'insurance.create', 'insurance.edit', 'insurance.delete',
             // Reports
-            'reports.view', 'reports.finance', 'reports.operations',
+            'reports.view', 'reports.finance', 'reports.operations', 'reports.insurance',
             // Portal
             'portal.view-own',
         ];
@@ -59,7 +59,7 @@ class RolesAndPermissionsSeeder extends Seeder
         // ── Roles with permissions ──
         $roles = [
             'Super Admin' => $permissions, // all
-            'Admin' => array_diff($permissions, ['users.manage', 'roles.manage']),
+            'Admin' => array_diff($permissions, ['users.manage', 'roles.manage']), // includes insurance + reports.insurance
             'Operations Manager' => [
                 'files.view', 'files.create', 'files.edit', 'files.assign', 'files.close',
                 'declarations.view', 'declarations.create', 'declarations.edit',
@@ -107,13 +107,36 @@ class RolesAndPermissionsSeeder extends Seeder
                 'expenses.view', 'expenses.create', 'expenses.edit',
                 'charges.view', 'charges.create', 'charges.edit',
                 'clients.view',
-                'reports.view', 'reports.finance',
+                'insurance.view',
+                'reports.view', 'reports.finance', 'reports.insurance',
             ],
             'Cashier' => [
                 'finance.view',
                 'receipts.view', 'receipts.create',
                 'disbursements.view', 'disbursements.create',
                 'pettycash.view', 'pettycash.create', 'pettycash.edit',
+            ],
+            'Insurance Officer' => [
+                'insurance.view', 'insurance.create', 'insurance.edit', 'insurance.delete',
+                'files.view',
+                'clients.view', 'clients.create', 'clients.edit',
+                'documents.view', 'documents.upload',
+                'transport.view',
+                'partners.view',
+                'reports.view', 'reports.insurance',
+            ],
+            'Branch Manager' => [
+                'files.view', 'files.create', 'files.edit', 'files.assign', 'files.close',
+                'declarations.view', 'declarations.create', 'declarations.edit',
+                'documents.view', 'documents.upload', 'documents.verify',
+                'milestones.view', 'milestones.update',
+                'transport.view', 'transport.create', 'transport.edit',
+                'insurance.view',
+                'clients.view', 'clients.create', 'clients.edit',
+                'partners.view',
+                'queries.view', 'queries.respond',
+                'hscodes.view',
+                'reports.view', 'reports.operations',
             ],
             'Client' => ['portal.view-own'],
         ];
