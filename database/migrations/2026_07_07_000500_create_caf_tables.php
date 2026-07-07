@@ -449,10 +449,19 @@ return new class extends Migration
             $table->string('provider_ref')->nullable();
             $table->timestamps();
         });
+        // ── Add users → clients foreign key (deferred from users migration) ──
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('client_id')->references('id')->on('clients')->nullOnDelete();
+        });
     }
 
     public function down(): void
     {
+        // Drop the deferred foreign key first
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_client_id_foreign');
+        });
+
         Schema::dropIfExists('sms_logs');
         Schema::dropIfExists('settings');
         Schema::dropIfExists('number_sequences');

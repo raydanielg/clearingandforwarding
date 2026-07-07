@@ -1,0 +1,24 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Redirect all HTTP traffic to the public/ directory
+    RewriteRule ^$ public/ [L]
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "(^\.|composer\.(json|lock)|package\.(json|lock)|phpunit\.xml|\.env|artisan|README\.md)">
+    Require all denied
+</FilesMatch>
+
+# Disable XML-RPC
+<Files xmlrpc.php>
+    Require all denied
+</Files>

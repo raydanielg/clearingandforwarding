@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->foreignId('client_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('client_id')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamp('last_login_at')->nullable();
             $table->rememberToken();

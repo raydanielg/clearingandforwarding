@@ -121,5 +121,6 @@
     })();
     </script>
 
+    @include('partials.demo-notice')
 </body>
 </html>
