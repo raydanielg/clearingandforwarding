@@ -474,9 +474,9 @@ return new class extends Migration
         Schema::dropIfExists('file_charges');
         Schema::dropIfExists('charge_items');
         Schema::dropIfExists('trips');
-        Schema::dropIfExists('transporters');
         Schema::dropIfExists('drivers');
         Schema::dropIfExists('trucks');
+        Schema::dropIfExists('transporters');
         Schema::dropIfExists('delivery_orders');
         Schema::dropIfExists('milestones');
         Schema::dropIfExists('documents');
