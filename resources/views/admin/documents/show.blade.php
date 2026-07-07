@@ -34,7 +34,7 @@
 <script>
 function verifyDoc() { $.ajax({ url: '{{ route('admin.documents.verify', $document) }}', type: 'POST', data: { _token: '{{ csrf_token() }}' }, success: function(r) { showToast('success', 'Verified', r.message); setTimeout(() => location.reload(), 800); }, error: function() { showToast('error', 'Error', 'Could not verify'); } }); }
 function markOriginal() { $.ajax({ url: '{{ route('admin.documents.original', $document) }}', type: 'POST', data: { _token: '{{ csrf_token() }}' }, success: function(r) { showToast('success', 'Success', r.message); setTimeout(() => location.reload(), 800); }, error: function() { showToast('error', 'Error', 'Could not update'); } }); }
-function deleteDoc() { if (!confirm('Delete this document?')) return; $.ajax({ url: '{{ route('admin.documents.destroy', $document) }}', type: 'POST', data: { _method: 'DELETE', _token: '{{ csrf_token() }}' }, success: function(r) { showToast('success', 'Deleted', r.message); setTimeout(() => window.location.href = '{{ route('admin.documents.index') }}', 800); }, error: function() { showToast('error', 'Error', 'Could not delete'); } }); }
+function deleteDoc() { confirmDelete('{{ route('admin.documents.destroy', $document) }}', { title: 'Delete Document?', text: 'This document file will be permanently removed.', redirect: '{{ route('admin.documents.index') }}' }); }
 </script>
 @endpush
 @endsection

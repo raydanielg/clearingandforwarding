@@ -102,10 +102,10 @@
 @push('scripts')
 <script>
 function deleteClient(id) {
-    if (!confirm('Delete this client? This action cannot be undone.')) return;
-    $.ajax({ url: '{{ route('admin.clients.destroy', '__id__') }}'.replace('__id__', id), type: 'POST', data: { _method: 'DELETE', _token: '{{ csrf_token() }}' },
-        success: function(res) { showToast('success', 'Deleted', res.message); setTimeout(() => window.location.href = '{{ route('admin.clients.index') }}', 800); },
-        error: function() { showToast('error', 'Error', 'Could not delete client'); }
+    confirmDelete('{{ route('admin.clients.destroy', '__id__') }}'.replace('__id__', id), {
+        title: 'Delete Client?',
+        text: 'This client and all associated data will be permanently removed.',
+        redirect: '{{ route('admin.clients.index') }}'
     });
 }
 </script>

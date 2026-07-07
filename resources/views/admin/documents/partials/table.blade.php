@@ -32,6 +32,6 @@
 @push('scripts')
 <script>
 function verifyDoc(id) { $.ajax({ url: '{{ route('admin.documents.verify', '__id__') }}'.replace('__id__', id), type: 'POST', data: { _token: '{{ csrf_token() }}' }, success: function(r) { showToast('success', 'Verified', r.message); setTimeout(() => location.reload(), 800); }, error: function() { showToast('error', 'Error', 'Could not verify'); } }); }
-function deleteDoc(id) { if (!confirm('Delete this document?')) return; $.ajax({ url: '{{ route('admin.documents.destroy', '__id__') }}'.replace('__id__', id), type: 'POST', data: { _method: 'DELETE', _token: '{{ csrf_token() }}' }, success: function(r) { showToast('success', 'Deleted', r.message); setTimeout(() => location.reload(), 800); }, error: function() { showToast('error', 'Error', 'Could not delete'); } }); }
+function deleteDoc(id) { confirmDelete('{{ route('admin.documents.destroy', '__id__') }}'.replace('__id__', id), { title: 'Delete Document?', text: 'This document file will be permanently removed.' }); }
 </script>
 @endpush

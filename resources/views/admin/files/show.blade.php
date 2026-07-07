@@ -187,10 +187,10 @@ $('#milestoneForm').on('submit', function(e) {
     });
 });
 function closeFile() {
-    if (!confirm('Close this file? This will mark it as closed.')) return;
-    $.ajax({ url: '{{ route('admin.files.close', $file) }}', type: 'POST', data: { _token: '{{ csrf_token() }}' },
-        success: function(r) { if (r.success) { showToast('success', 'Success', r.message); setTimeout(() => location.reload(), 800); } },
-        error: function() { showToast('error', 'Error', 'Could not close file'); }
+    confirmAction('{{ route('admin.files.close', $file) }}', {
+        title: 'Close This File?',
+        text: 'This will mark the shipment file as closed. You can reopen it later if needed.',
+        successMsg: 'File closed successfully!'
     });
 }
 </script>
