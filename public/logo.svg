@@ -1,0 +1,17 @@
+<svg width="200" height="48" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  {{-- Box icon --}}
+  <rect x="2" y="8" width="32" height="32" rx="8" fill="url(#grad1)"/>
+  <path d="M10 18 L18 14 L26 18 L18 22 Z" fill="#fff" opacity="0.9"/>
+  <path d="M10 18 L10 28 L18 32 L18 22 Z" fill="#fff" opacity="0.7"/>
+  <path d="M26 18 L26 28 L18 32 L18 22 Z" fill="#fff" opacity="0.5"/>
+  <path d="M14 24 L22 24" stroke="#f9ac00" stroke-width="1.5" stroke-linecap="round"/>
+  {{-- Text --}}
+  <text x="44" y="24" font-family="Poppins, sans-serif" font-size="20" font-weight="800" fill="#001816">CAF</text>
+  <text x="44" y="38" font-family="Nunito, sans-serif" font-size="8" font-weight="600" fill="#024938" letter-spacing="2">CLEARING &amp; FORWARDING</text>
+  <defs>
+    <linearGradient id="grad1" x1="2" y1="8" x2="34" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#024938"/>
+      <stop offset="1" stop-color="#01241f"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,27 @@
+@extends('layouts.portal')
+@section('title', 'My Documents - ' . config('app.name'))
+@section('page_title', 'My Documents')
+
+@section('content')
+<div class="flex items-center justify-between mb-4">
+    <div class="relative">
+        <input type="text" id="docSearch" placeholder="Search documents..." class="pl-9 pr-4 py-2 rounded-lg border border-gray-200 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none w-56">
+        <svg class="w-4 h-4 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+    </div>
+</div>
+<div class="bg-white rounded-xl border overflow-hidden"><div id="docTable">@include('portal.documents.partials.table')</div></div>
+@push('scripts')
+<script>
+let dt;
+$('#docSearch').on('input', function() {
+    clearTimeout(dt);
+    dt = setTimeout(function() {
+        const p = new URLSearchParams();
+        if ($('#docSearch').val()) p.set('search', $('#docSearch').val());
+        $.ajax({ url: '{{ route('portal.documents.index') }}?' + p.toString(), type: 'GET', dataType: 'json',
+            success: function(r) { $('#docTable').html(r.html); } });
+    }, 300);
+});
+</script>
+@endpush
+@endsection
