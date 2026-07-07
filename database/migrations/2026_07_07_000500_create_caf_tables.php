@@ -243,6 +243,19 @@ return new class extends Migration
             $table->softDeletes();
         });
 
+        // ── Transporters ──
+        Schema::create('transporters', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('tin')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('contact_person')->nullable();
+            $table->text('rate_notes')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         // ── Trucks ──
         Schema::create('trucks', function (Blueprint $table) {
             $table->id();
@@ -263,19 +276,6 @@ return new class extends Migration
             $table->string('license_no')->nullable();
             $table->date('license_expiry')->nullable();
             $table->foreignId('truck_id')->nullable()->constrained()->nullOnDelete();
-            $table->boolean('is_active')->default(true);
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        // ── Transporters ──
-        Schema::create('transporters', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('tin')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('contact_person')->nullable();
-            $table->text('rate_notes')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();
